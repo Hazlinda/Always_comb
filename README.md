@@ -10,17 +10,19 @@ SystemVerilog provides a special always_comb procedure for modeling combinationa
     d <= #1ns b & c;
     
 The always_comb procedure provides functionality that is different than a normal always procedure:
-— There is an inferred sensitivity list.
-— The variables written on the left-hand side of assignments shall not be written to by any other process.
-— The procedure is automatically triggered once at time zero, after all initial and always blocks have been started, so that the outputs of the procedure are consistent with the inputs.
+1.There is an inferred sensitivity list.
+2.The variables written on the left-hand side of assignments shall not be written to by any other process.
+3.The procedure is automatically triggered once at time zero, after all initial and always blocks have been started, so that the outputs of the procedure are consistent with the inputs.
 
-The SystemVerilog always_comb procedure differs from the Verilog-2001 always @* in the following ways:
-— always_comb automatically executes once at time zero, whereas always @* waits until a change occurs on a signal in the inferred sensitivity list.
-— always_comb is sensitive to changes within the contents of a function, whereas always @* is only sensitive to changes to the arguments of a function.
-— Variables on the left-hand side of assignments within an always_comb procedure, including variables from the contents of a called function, shall not be written to by any other processes, whereas always @* permits multiple processes     to write to the same variable.
-— Statements in an always_comb shall not include those that block, have blocking timing or event controls, or fork...join statements.
 
-Software tools can perform additional checks to warn if the behavior within an always_comb procedure does not represent combinational logic, such as if latched behavior can be inferred.
+always_comb automatically executes once at time zero, whereas always @* waits until a change occurs on a signal in the inferred sensitivity list.
+
+always_comb is sensitive to changes within the contents of a function, whereas always @* is only sensitive to changes to the arguments of a function.
+
+Variables on the left-hand side of assignments within an always_comb procedure, including variables from the contents of a called function, shall not be written to by any other processes, whereas always @* permits multiple processes to write to the same variable.
+
+Statements in an always_comb shall not include those that block, have blocking timing or event controls, or     fork...join     statements.
+
 
 # Implicit always_comb sensitivities
 
